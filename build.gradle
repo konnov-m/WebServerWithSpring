@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-core:5.3.22'
+    implementation 'org.springframework:spring-web:5.3.22'
+    implementation 'org.springframework:spring-context:5.3.22'
+    implementation 'org.springframework:spring-webmvc:5.3.22'
+    implementation 'org.springframework:spring-beans:5.3.22'
+    implementation 'org.thymeleaf:thymeleaf:3.0.15.RELEASE'
+    implementation 'org.thymeleaf:thymeleaf-spring5:3.0.15.RELEASE'
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
+}
+
+war {
+    from 'src/main/resources'
+}
+
