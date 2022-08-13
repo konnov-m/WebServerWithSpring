@@ -1,7 +1,9 @@
 # WebServerWithSpring
 Tomcat + Spring
 
-Перейти в <tomcat_home>/conf/server.xml и добавить:
+1)Необходимо скачать apache tomcat.
+
+2)Перейти в <tomcat_home>/conf/server.xml и добавить:
 ```
 <Resource name="jdbc/Users"
               auth="Container"
@@ -19,3 +21,8 @@ Tomcat + Spring
             global="jdbc/Users"
             type="javax.sql.DataSource"/>
  ```       
+3) Сборка war файла
+
+4) Перемещение war файла в папку <tomcat_home>/webapps/
+
+5) Запуск сервера tomcat
