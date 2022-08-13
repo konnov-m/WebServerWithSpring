@@ -36,8 +36,6 @@ public class UserController {
     @PostMapping("/user/save")
     public RedirectView userSave(@ModelAttribute User user) {
         repository.create(user.getName());
-        System.out.println("--------------------------------");
-        System.out.println(user.getName());
         return new RedirectView("/", true);
     }
 

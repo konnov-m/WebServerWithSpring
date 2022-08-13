@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserRepositoryImpl implements UserRepository{
 
     private final List<User> users = new ArrayList<>();

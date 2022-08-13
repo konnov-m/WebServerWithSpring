@@ -1,40 +1,34 @@
 package org.example.repository;
 
-import org.example.core.HibernateUtils;
 import org.example.models.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserRepositoryDB implements UserRepository{
 
-    private SessionFactory sessionFactory = HibernateUtils.buildSessionFactory(HIBERNATE_CFG_FILE, User.class);
-    public static final String HIBERNATE_CFG_FILE = "hibernate.cfg.xml";
+    private SessionFactory sessionFactory;
+
+    public UserRepositoryDB(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public List<User> findAll() {
-        try (Session session = sessionFactory.openSession()){
-            session.getTransaction().begin();
-            return session.createQuery("SELECT a FROM Users a", User.class).getResultList();
-        }
-
+        return sessionFactory.getCurrentSession()
+                .createQuery("from " + User.class.getName()).getResultList();
     }
 
     @Override
     public long create(String name) {
+        System.out.println("------------------------");
+        System.out.println("Creating User with name: " + name);
         User user = new User(name);
-        try (Session session = sessionFactory.openSession()){
-            session.getTransaction().begin();
-            session.persist(user);
-            session.getTransaction().commit();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
         return user.getId();
     }
 }
